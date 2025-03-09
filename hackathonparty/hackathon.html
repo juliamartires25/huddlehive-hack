@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Members</title>
+    <style>
+        /* Set the background color for the entire page */
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Centering everything inside a container */
+        .container {
+            text-align: center;
+        }
+
+        /* Flexbox for member images & buttons */
+        .member-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        /* Each member's image & button stacked vertically */
+        .member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect for member */
+        .member:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        /* Style the button */
+        .member button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .member button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #e6f7ff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        /* Style for property listings */
+        .property-info {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effect for property listings */
+        .property-info:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        /* Modal popup styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .close {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header class="container">
+        <h1><b>Main Search Preferences</b></h1>
+    </header>
+
+    <header class="container">
+        <h2>Group Members</h2>
+        <div class="member-container">
+            <div class="member">
+                <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\Screenshot 2025-03-08 211701.png" width="100" height="100" alt="Alice">
+                <button onclick="showMemberInfo('Alice')">Alice</button>
+            </div>
+            <div class="member">
+                <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\Screenshot 2025-03-08 212336.png" width="100" height="100" alt="Bob">
+                <button onclick="showMemberInfo('Bob')">Bob</button>
+            </div>
+            <div class="member">
+                <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\Screenshot 2025-03-08 212351.png" width="100" height="100" alt="Charlie">
+                <button onclick="showMemberInfo('Charlie')">Charlie</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Property Listings -->
+    <div class="property-info" onclick="showPropertyDetails('5 Victoria Road, London E1 6AN', 'Semi-detached', 'Loft conversion, Solar panels, Basement storage', '£478,798')">
+        <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\best_match.jpg" height="150" width="250" alt="Best Match">
+        <p><strong>5 Victoria Road, London</strong><br>2 Bedrooms | 1 Bathroom</p>
+    </div>
+
+    <div class="property-info" onclick="showPropertyDetails('12 Green Park, London E3 5RT', 'Detached', 'Parking, Garden, Double glazing, Central heating', '£579,999')">
+        <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\alice_fav.jpg" height="150" width="250" alt="Alice's Favorite">
+        <p><strong>12 Green Park, London</strong><br>3 Bedrooms | 2 Bathrooms</p>
+    </div>
+
+    <div class="property-info" onclick="showPropertyDetails('23 Baker Street, Belfast G1 1DA', 'Semi-detached', 'Garage, Balcony, Underfloor heating', '£143,535')">
+        <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\baker_street.jpg" height="150" width="250" alt="Baker Street">
+        <p><strong>23 Baker Street, Belfast</strong><br>2 Bedrooms | 1 Bathroom</p>
+    </div>
+
+    <div class="property-info" onclick="showPropertyDetails('7 Elm Grove, Aberdeen L1 8JQ', 'Semi-detached', 'Loft conversion, Solar panels, Basement storage', '£478,798')">
+        <img src="C:\Users\julia\OneDrive - University of Hertfordshire\hackathonparty\elm_street.webp" height="150" width="250" alt="Elm Street">
+        <p><strong>7 Elm Grove, Aberdeen</strong><br>2 Bedrooms | 1 Bathroom</p>
+    </div>
+
+    <!-- Modal for Property Details -->
+    <div id="propertyModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="propertyTitle"></h2>
+            <p><strong>Type:</strong> <span id="propertyType"></span></p>
+            <p><strong>Features:</strong> <span id="propertyFeatures"></span></p>
+            <p><strong>Price:</strong> <span id="propertyPrice"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function showMemberInfo(name) {
+            alert(name + " is a valuable group member!");
+        }
+
+        function showPropertyDetails(address, type, features, price) {
+            document.getElementById("propertyTitle").innerText = address;
+            document.getElementById("propertyType").innerText = type;
+            document.getElementById("propertyFeatures").innerText = features;
+            document.getElementById("propertyPrice").innerText = price;
+            document.getElementById("propertyModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("propertyModal").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
