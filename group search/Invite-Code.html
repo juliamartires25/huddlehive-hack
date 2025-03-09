@@ -1,0 +1,48 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Search</title>
+    <link rel="stylesheet" href="styles1.css">
+    
+</head>
+<body>
+
+<div class="container" style="width: 93%; height: 321px">
+<header>
+        <header>
+        <input type="text" id="search-bar" placeholder="Invite the people you are searching with">
+			<br />
+			<br />
+    </header>
+    
+    <button onclick="generateCode()">Generate Invite Code</button>
+    <p id="inviteCode" style="display: none;"></p>
+    <button id="copyButton" onclick="copyCode()" style="display:none;">Copy Code</button>
+
+    	<br />
+		<br />
+
+    <h3>QR Code</h3>
+		<p>&nbsp;</p>
+    <div id="qrContainer" style="display: none;">
+        <img id="qrCode" src="" alt="QR Code">
+    </div>
+
+    <h3>Share the group code</h3>
+    <div id="socialShare" class="share-buttons" style="display: none;">
+        <a id="facebookShare" href="#" target="_blank">Facebook</a>
+        <a id="twitterShare" href="#" target="_blank">Twitter</a>
+        <a id="whatsappShare" href="#" target="_blank">WhatsApp</a>
+        <a id="emailShare" href="#">Email</a>
+    </div>
+</div>
+
+<script src="script1.js"></script>
+
+<p>&nbsp;</p>
+
+</body>
+</html>
